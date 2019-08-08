@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="lib/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <my-first-zujian></my-first-zujian>
+    <my-second-zujian></my-second-zujian>
+    <my-third-zujian title="第一个title"></my-third-zujian>
+    <my-third-zujian v-for="post in posts" v-bind:key="post.id" v-bind:title="post.title"></my-third-zujian>
+</div>
+<script>
+    Vue.component('my-first-zujian',{
+        template:'<h3>这是一个h3的html</h3>'
+    })
+    Vue.component('mySecondZujian',{
+        data:function(){
+            return {
+                msg:'这是一个h2的html的test'
+            }
+        },
+        template:'<h2>{{msg}}</h2>'
+    })
+    Vue.component('myThirdZujian',{
+        props:['title'],
+        template:'<h3>{{title}}</h3>'
+    })
+    var vm = new Vue({
+        el:"#app",
+        data:{
+            posts:[
+                {id:1,title:'first title'},
+                {id:2,title:'second title'},
+                {id:3,title:'third title'}
+            ]
+        },
+        methods:{
+        }
+    })
+</script>
+</body>
+</html>

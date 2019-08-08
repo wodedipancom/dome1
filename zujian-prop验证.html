@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="lib/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <my-component :prop-a="1234" prop-b="aiyou" prop-c="ttt" :prop-d="3465" :prop-e="ob"></my-component>
+
+</div>
+<script>
+    Vue.component('my-component',{
+        props:{
+            propA:Number,
+            propB:[String,Number],
+            propC:{
+                type:String,
+                required:true
+            },
+            propD:{
+                type:Number,
+                default:100
+            },
+            propE:{
+                type:Object,
+                default:function () {
+                    return {message:'hello'}
+                }
+            },
+            propF:{
+                validator:function (value) {
+                    return ['success', 'warning', 'danger'].indexOf(value) !== -1
+                }
+            }
+        },
+        template:'<div><h3>propA:{{propA}}</h3><h3>propB:{{propB}}</h3><h3>propC:{{propC}}</h3><h3>propD:{{propD}}</h3><h3>propE:{{propE.message}}</h3></div>'
+    })
+    var vm = new Vue({
+        el:"#app",
+        data:{
+            posts:[
+                {id:1,title:'first title'},
+                {id:2,title:'second title'},
+                {id:3,title:'third title'}
+            ],
+            ob:{id:1,message:'first title'}
+        },
+        methods:{
+        }
+    })
+</script>
+</body>
+</html>

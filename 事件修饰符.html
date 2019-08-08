@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="lib/vue.js"></script>
+</head>
+<style>
+    .inner{
+        height: 200px;
+        background-color: cyan;
+    }
+</style>
+<body>
+<div id="app">
+    <!-- .stop阻止冒泡事件-->
+    <div class="inner" @click="innerClick">
+        <input type="button" value="按钮" @click.stop="btnClick">
+    </div>
+    <!-- .prevent阻止默认事件，加上.prevent事件，a标签不再跳转-->
+    <a href="https://www.baidu.com/" @click.prevent="aClick">百度链接</a>
+    <!-- .self只有事件本身触发回调-->
+    <div class="inner" @click.self="innerClick">
+        <input type="button" value="按钮" @click="btnClick">
+    </div>
+    <!-- .once只执行一次-->
+    <a href="https://www.baidu.com/" @click.prevent.once="aClick">百度链接</a>
+    <!-- .capture添加改事件使用事件捕获机制，先捕获改方法-->
+    <div class="inner" @click.capture="innerClick">
+        <input type="button" value="按钮" @click="btnClick">
+    </div>
+</div>
+<script>
+    var vm = new Vue({
+        el:"#app",
+        data:{
+
+        },
+        methods:{
+            innerClick(){
+                console.log("innerClick的点击事件")
+            },
+            btnClick(){
+                console.log("btnClick的点击事件")
+            },
+            aClick(){
+                console.log("a标签的点击事件")
+            }
+        }
+    })
+</script>
+</body>
+</html>
